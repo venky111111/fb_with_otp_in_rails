@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter OTP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h2 {
+      color: #4267B3;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .otp-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      width: 410px;
+    }
+
+    label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .submit-btn {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #2980b9;
+    }
+    #resend{
+      display: none;
+    }
+    .may{
+      display: flex}
+  </style>
+</head>
+<body>
+  <% if user_signed_in? %>
+    <h2>Welcome, <%= current_user.name %> <br>
+      Please enter the OTP sent to <br><%= current_user.phonenumber %></h2>
+
+    <div class="otp-container">
+      <%= form_with(url: otp_index_path, method: :post) do |form| %>
+        <%= form.label :otp, 'Enter OTP:' %>
+        <%= form.text_field :otp %>
+
+        <%= form.submit 'Submit OTP', class: 'submit-btn' %>
+      <% end %>
+    </div>
+
+    <div class="may"><h2>Not received your code?</h2><h2 id="countdown"></h2>
+      <h2><%= link_to 'Resend OTP', otp_path(id: current_user.id), class: 'nav-link', id: 'resend' %></h2>
+</div>
+
+
+
+<script>
+  var countdown = 5;
+
+  function updateCountdown() {
+    document.getElementById('countdown').innerHTML = countdown;
+
+    if (countdown === 0) {
+              document.getElementById('resend').style.display = "block"
+                document.getElementById('countdown').style.display = "none"
+      clearInterval(countdownInterval);
+    } else {
+      countdown--;
+    }
+  }
+
+  updateCountdown();
+
+  var countdownInterval = setInterval(updateCountdown, 1000);
+</script>
+
+    <h2><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'nav-link' %></h2>
+
+  <% else %>
+    <%= link_to 'Sign in', new_user_session_path, class: 'action-button' %>
+    <%= link_to 'Sign up', new_user_registration_path, class: 'action-button' %>
+  <% end %>
+</body>
+</html>
