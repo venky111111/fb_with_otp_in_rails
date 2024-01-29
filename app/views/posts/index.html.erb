@@ -158,7 +158,7 @@
            
           <% end %>      
           <% if post.user == current_user %>
-            <%= link_to "Delete", post_path(post), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'action-button' %>
+            <%= link_to "Delete", post_path(post), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, id: 'actionn-buttonn' %>
           <% end %>
           </div>
           <div class="likes-section">     

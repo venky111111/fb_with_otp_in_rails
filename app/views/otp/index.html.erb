@@ -54,6 +54,7 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-top: 20px;
     }
 
     .submit-btn:hover {
@@ -68,6 +69,7 @@
 </head>
 <body>
   <% if user_signed_in? %>
+  <h4>We need to verify your mobile number before going to the application</h4>
     <h2>Welcome, <%= current_user.name %> <br>
       Please enter the OTP sent to <br><%= current_user.phonenumber %></h2>
 
@@ -80,7 +82,7 @@
       <% end %>
     </div>
 
-    <div class="may"><h2>Not received your code?</h2><h2 id="countdown"></h2>
+    <div class="may"><h2>Not received your code?  </h2><h2 id="countdown"></h2>
       <h2><%= link_to 'Resend OTP', otp_path(id: current_user.id), class: 'nav-link', id: 'resend' %></h2>
 </div>
 

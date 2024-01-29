@@ -69,6 +69,9 @@
     input[type="submit"]:hover {
       background-color: #45a049;
     }
+    #act{
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -124,7 +127,9 @@
       </div>
     <% end %>
 
-    <%=    %>
+    <div class="links">
+      Already SignUp Then Do <button id="act"><%= render "devise/shared/links" %></button>
+    </div>
   </form>
 </body>
 </html>

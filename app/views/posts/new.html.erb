@@ -52,10 +52,15 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      margin: 10px;
     }
 
     input[type="submit"]:hover {
       background-color: #45a049;
+
+    }
+    .btn{
+      text-decoration: none;
     }
   </style>
 </head>
@@ -79,6 +84,8 @@
   <div>
     <%= form.submit 'Create Post' %>
   </div>
+      <%= link_to 'Back to Home', posts_path, class: 'btn btn-primary back-btn' %>
+
 <% end %>
 
 
